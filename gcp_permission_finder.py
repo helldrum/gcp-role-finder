@@ -7,6 +7,8 @@ import yaml
 from googleapiclient import discovery
 from oauth2client.client import GoogleCredentials
 
+from pprint import pformat
+
 STORAGE_FILE = f"{os.path.dirname(os.path.realpath(__file__))}/roles.yaml"
 
 
@@ -81,24 +83,41 @@ def match_permission_with_local_file(permission, roles_dict, matched_dict):
     for role_name in roles_dict:
         try:
             if permission in roles_dict[role_name].get("permissions"):
-                 matched_dict[role_name] = roles_dict[role_name]
-#                print(
-#                    f"""\n{role_name}  {roles_dict[role_name]["title"]}
-#found {roles_dict[role_name]['nb_permissions']} permission(s) for this role
-#{roles_dict[role_name].get("description")}\n"""
-#                )
-
+                matched_dict[role_name] = roles_dict[role_name]
         except TypeError:
             pass
     return matched_dict
 
 
 def format_and_print_result(matched_dict):
-   reversed_permissions_nbs=(tuple(sorted([(matched_dict[role]['nb_permissions'], role) for role in matched_dict])))
 
-   print (reversed_permissions_nbs)
-#   for i in range(0,len(reversed_permissions_nbs)-3):
-#        print (reversed_permissions_nbs[i])
+    # sort and reverse roles by nb permissions
+    reversed_permissions_nbs = (
+        tuple(
+            sorted(
+                [(matched_dict[role]["nb_permissions"], role) for role in matched_dict]
+            )
+        )
+    )[::-1]
+
+    # print all roles - last 3 roles without permissions
+    for i in range(0,len(reversed_permissions_nbs)-3):
+        role_name = reversed_permissions_nbs[i][1]
+        print(
+            f"""\n{role_name}  {matched_dict[role_name]["title"]}
+found {matched_dict[role_name]['nb_permissions']} permission(s) for this role
+{matched_dict[role_name].get("description")}"""
+            )
+
+    for i in range(len(reversed_permissions_nbs)-3, len(reversed_permissions_nbs)):
+        role_name = reversed_permissions_nbs[i][1]
+        print (
+            f"""\n{role_name}  {matched_dict[role_name]["title"]}
+found {matched_dict[role_name]['nb_permissions']} permission(s) for this role
+{matched_dict[role_name].get("description")}\n
+{pformat(matched_dict[role_name].get("permissions"))}\n
+"""
+        )
 
 def main():
     clean_args = parse_args()
@@ -107,9 +126,12 @@ def main():
 
     matched_dict = {}
     matched_dict = match_permission_with_local_file(
-        permission=clean_args["permission"], roles_dict=roles_dict, matched_dict=matched_dict
+        permission=clean_args["permission"],
+        roles_dict=roles_dict,
+        matched_dict=matched_dict,
     )
     format_and_print_result(matched_dict)
+
 
 if __name__ == "__main__":
     main()
