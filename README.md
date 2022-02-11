@@ -14,7 +14,7 @@ you need to have gcloud installed (since we will use default gcloud creds to aut
 
 clone the repository
 
-you need to have pipenv installed and run pipenv install
+you need to have pipenv and pipenv-shebang installed on system level and run pipenv install
 
 ```
 pipenv shell
