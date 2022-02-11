@@ -3,11 +3,12 @@
 
 import argparse
 import os
-import yaml
-from googleapiclient import discovery
-from oauth2client.client import GoogleCredentials
-
 from pprint import pformat
+import yaml
+
+from googleapiclient import discovery
+import google.auth
+import google.auth.transport.requests
 
 STORAGE_FILE = f"{os.path.dirname(os.path.realpath(__file__))}/roles.yaml"
 
@@ -51,7 +52,10 @@ def store_all_roles_and_permission_if_needed(store):
 
 def refresh_storage_file():
     roles_dict = {}
-    credentials = GoogleCredentials.get_application_default()
+
+    credentials, _ = google.auth.default(
+        scopes=["https://www.googleapis.com/auth/cloud-platform"]
+    )
     gcp_iam_api = discovery.build("iam", "v1", credentials=credentials)
     request = gcp_iam_api.roles().list()
 
@@ -101,23 +105,24 @@ def format_and_print_result(matched_dict):
     )[::-1]
 
     # print all roles - last 3 roles without permissions
-    for i in range(0,len(reversed_permissions_nbs)-3):
+    for i in range(0, len(reversed_permissions_nbs) - 3):
         role_name = reversed_permissions_nbs[i][1]
         print(
             f"""\n{role_name}  {matched_dict[role_name]["title"]}
 found {matched_dict[role_name]['nb_permissions']} permission(s) for this role
 {matched_dict[role_name].get("description")}"""
-            )
+        )
 
-    for i in range(len(reversed_permissions_nbs)-3, len(reversed_permissions_nbs)):
+    for i in range(len(reversed_permissions_nbs) - 3, len(reversed_permissions_nbs)):
         role_name = reversed_permissions_nbs[i][1]
-        print (
+        print(
             f"""\n{role_name}  {matched_dict[role_name]["title"]}
 found {matched_dict[role_name]['nb_permissions']} permission(s) for this role
 {matched_dict[role_name].get("description")}\n
 {pformat(matched_dict[role_name].get("permissions"))}\n
 """
         )
+
 
 def main():
     clean_args = parse_args()

@@ -206,7 +206,7 @@ roles/actions.Viewer:
   title: Actions Viewer
 roles/aiplatform.admin:
   description: Grants full access to all resources in Vertex AI
-  nb_permissions: 215
+  nb_permissions: 214
   permissions:
   - aiplatform.annotationSpecs.create
   - aiplatform.annotationSpecs.delete
@@ -409,7 +409,6 @@ roles/aiplatform.admin:
   - aiplatform.tensorboards.delete
   - aiplatform.tensorboards.get
   - aiplatform.tensorboards.list
-  - aiplatform.tensorboards.recordAccess
   - aiplatform.tensorboards.update
   - aiplatform.trainingPipelines.cancel
   - aiplatform.trainingPipelines.create
@@ -1105,13 +1104,6 @@ roles/aiplatform.serviceAgent:
   - storage.objects.list
   - storage.objects.update
   title: Vertex AI Service Agent
-roles/aiplatform.tensorboardWebAppUser:
-  description: Grants access to the Vertex AI Tensorboard web app. Using the web app
-    will incur charges.
-  nb_permissions: 1
-  permissions:
-  - aiplatform.tensorboards.recordAccess
-  title: Vertex AI Tensorboard Web App User
 roles/aiplatform.user:
   description: Grants access to use all resource in Vertex AI
   nb_permissions: 212
@@ -2532,7 +2524,7 @@ roles/appengine.serviceAdmin:
 roles/appengineflex.serviceAgent:
   description: Can edit and manage App Engine Flexible Environment apps. Includes
     access to service accounts.
-  nb_permissions: 156
+  nb_permissions: 154
   permissions:
   - billing.accounts.get
   - cloudbuild.builds.create
@@ -2632,9 +2624,7 @@ roles/appengineflex.serviceAgent:
   - compute.regionBackendServices.use
   - compute.regionOperations.get
   - compute.regions.get
-  - compute.routes.get
   - compute.subnetworks.delete
-  - compute.subnetworks.get
   - compute.targetHttpProxies.create
   - compute.targetHttpProxies.delete
   - compute.targetHttpProxies.get
@@ -4174,12 +4164,11 @@ roles/binaryauthorization.policyViewer:
 roles/binaryauthorization.serviceAgent:
   description: Can read Notes and Occurrences from the Container Analysis Service
     to find and verify signatures.
-  nb_permissions: 15
+  nb_permissions: 14
   permissions:
   - binaryauthorization.attestors.get
   - binaryauthorization.attestors.list
   - binaryauthorization.attestors.verifyImageAttested
-  - cloudasset.assets.exportResource
   - cloudasset.feeds.create
   - cloudasset.feeds.delete
   - cloudasset.feeds.get
@@ -26214,7 +26203,7 @@ roles/firebase.developAdmin:
   title: Firebase Develop Admin
 roles/firebase.developViewer:
   description: Read access to Firebase Develop products and Analytics.
-  nb_permissions: 119
+  nb_permissions: 118
   permissions:
   - automl.annotationSpecs.get
   - automl.annotationSpecs.list
@@ -26251,7 +26240,6 @@ roles/firebase.developViewer:
   - cloudnotifications.activities.list
   - datastore.databases.get
   - datastore.databases.getIamPolicy
-  - datastore.databases.getMetadata
   - datastore.databases.list
   - datastore.entities.get
   - datastore.entities.list
@@ -26444,7 +26432,7 @@ roles/firebase.growthViewer:
 roles/firebase.managementServiceAgent:
   description: Access to create new service agents for Firebase projects; assign roles
     to service agents; provision GCP resources as required by Firebase services.
-  nb_permissions: 45
+  nb_permissions: 44
   permissions:
   - apikeys.keys.create
   - apikeys.keys.get
@@ -26486,7 +26474,6 @@ roles/firebase.managementServiceAgent:
   - servicemanagement.services.bind
   - serviceusage.services.enable
   - serviceusage.services.get
-  - serviceusage.services.use
   - storage.buckets.create
   - storage.buckets.get
   - storage.buckets.getIamPolicy
@@ -26690,7 +26677,7 @@ roles/firebase.sdkProvisioningServiceAgent:
   title: Firebase SDK Provisioning Service Agent
 roles/firebase.viewer:
   description: Read-only access to Firebase products.
-  nb_permissions: 155
+  nb_permissions: 154
   permissions:
   - automl.annotationSpecs.get
   - automl.annotationSpecs.list
@@ -26737,7 +26724,6 @@ roles/firebase.viewer:
   - cloudtoolresults.steps.list
   - datastore.databases.get
   - datastore.databases.getIamPolicy
-  - datastore.databases.getMetadata
   - datastore.databases.list
   - datastore.entities.get
   - datastore.entities.list
@@ -36163,7 +36149,7 @@ roles/notebooks.runner:
 roles/notebooks.serviceAgent:
   description: Provide access for notebooks service agent to manage notebook instances
     in user projects
-  nb_permissions: 389
+  nb_permissions: 388
   permissions:
   - aiplatform.customJobs.cancel
   - aiplatform.customJobs.create
@@ -36483,7 +36469,6 @@ roles/notebooks.serviceAgent:
   - compute.zones.get
   - compute.zones.list
   - dataproc.clusters.get
-  - dataproc.clusters.use
   - dataproc.jobs.cancel
   - dataproc.jobs.create
   - dataproc.jobs.delete
@@ -42985,9 +42970,8 @@ roles/recommender.exporter:
   title: Recommendations Exporter
 roles/recommender.firewallAdmin:
   description: Admin of Firewall insights and recommendations.
-  nb_permissions: 8
+  nb_permissions: 7
   permissions:
-  - monitoring.timeSeries.list
   - recommender.computeFirewallInsights.get
   - recommender.computeFirewallInsights.list
   - recommender.computeFirewallInsights.update
@@ -42998,9 +42982,8 @@ roles/recommender.firewallAdmin:
   title: Firewall Recommender Admin
 roles/recommender.firewallViewer:
   description: Viewer of Firewall insights and recommendations.
-  nb_permissions: 7
+  nb_permissions: 6
   permissions:
-  - monitoring.timeSeries.list
   - recommender.computeFirewallInsights.get
   - recommender.computeFirewallInsights.list
   - recommender.locations.get
@@ -50011,7 +49994,7 @@ roles/visualinspection.serviceAgent:
   description: Grants Visual Inspection AI Service Agent admin roles for accessing/exporting
     training data, pushing containers artifacts to GCR and ArtifactsRegistry, and
     Vertex AI for storing data and running training jobs.
-  nb_permissions: 265
+  nb_permissions: 264
   permissions:
   - aiplatform.annotationSpecs.create
   - aiplatform.annotationSpecs.delete
@@ -50214,7 +50197,6 @@ roles/visualinspection.serviceAgent:
   - aiplatform.tensorboards.delete
   - aiplatform.tensorboards.get
   - aiplatform.tensorboards.list
-  - aiplatform.tensorboards.recordAccess
   - aiplatform.tensorboards.update
   - aiplatform.trainingPipelines.cancel
   - aiplatform.trainingPipelines.create
