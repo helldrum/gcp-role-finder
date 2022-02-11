@@ -7,6 +7,7 @@ name = "pypi"
 google-cloud-iam = "*"
 google-api-python-client = "*"
 oauth2client = "*"
+pyyaml = "*"
 
 [dev-packages]
 
