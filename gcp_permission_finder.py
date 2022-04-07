@@ -5,6 +5,7 @@ import argparse
 import os
 from pprint import pformat
 import yaml
+import sys
 
 from googleapiclient import discovery
 import google.auth
@@ -103,6 +104,9 @@ def format_and_print_result(matched_dict):
             )
         )
     )[::-1]
+    if not reversed_permissions_nbs:
+        print("ERROR: permission not found, empty result .")
+        sys.exit(-1)
 
     # print all roles - last 3 roles without permissions
     for i in range(0, len(reversed_permissions_nbs) - 3):
