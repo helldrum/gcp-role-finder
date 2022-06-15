@@ -118,15 +118,17 @@ found {matched_dict[role_name]['nb_permissions']} permission(s) for this role
         )
 
     for i in range(len(reversed_permissions_nbs) - 3, len(reversed_permissions_nbs)):
-        role_name = reversed_permissions_nbs[i][1]
-        print(
-            f"""\n{role_name}  {matched_dict[role_name]["title"]}
+        try:
+            role_name = reversed_permissions_nbs[i][1]
+            print(
+                f"""\n{role_name}  {matched_dict[role_name]["title"]}
 found {matched_dict[role_name]['nb_permissions']} permission(s) for this role
 {matched_dict[role_name].get("description")}\n
 {pformat(matched_dict[role_name].get("permissions"))}\n
 """
-        )
-
+            )
+        except IndexError :
+            print ('no match found.')
 
 def main():
     clean_args = parse_args()
