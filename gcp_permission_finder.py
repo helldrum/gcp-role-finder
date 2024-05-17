@@ -1,6 +1,10 @@
 #!/usr/bin/env pipenv-shebang
 # coding:utf8
 
+"""
+This role get one fine grain permission and find the smaller roles with this single permission
+"""
+
 import argparse
 import os
 from pprint import pformat

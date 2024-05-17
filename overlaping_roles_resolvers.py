@@ -1,6 +1,10 @@
 #!/usr/bin/env pipenv-shebang
 # coding:utf8
 
+"""
+This script check if two GCP role are overlapping (same permissions on both roles) 
+"""
+
 import argparse
 import os
 from pprint import pformat

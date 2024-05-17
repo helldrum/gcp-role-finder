@@ -1,7 +1,11 @@
 #!/usr/bin/env pipenv-shebang
 # coding:utf8
-import argparse
 
+"""
+This script get a list of fine grain permission and attempt to find the smaller roles with all those permission. 
+"""
+
+import argparse
 import os
 import yaml
 
@@ -88,9 +92,6 @@ def match_permissions_with_local_file(permissions, roles_dict):
         role_permissions = role_info.get("permissions", [])
         if all(permission in role_permissions for permission in permissions):
             matched_roles[role_name] = role_info
-
-    import pprint
-
     return matched_roles
 
 
